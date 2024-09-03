@@ -2,6 +2,8 @@ package com.example.jetpack_compose.ui
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -21,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -31,13 +36,27 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.jetpack_compose.R
+import com.example.jetpack_compose.ui.theme.JetpackComposeTheme
 
 @Preview
 @Composable
-fun ProfileHeader() {
-    HeaderCard {
-        TopUpInfo()
-        BottomUpInfo()
+fun ProfileHeaderDark() {
+    JetpackComposeTheme(darkTheme = true) {
+        HeaderCard {
+            TopUpInfo()
+            BottomUpInfo()
+        }
+    }
+}
+
+@Preview
+@Composable
+fun ProfileHeaderLight() {
+    JetpackComposeTheme(darkTheme = false) {
+        HeaderCard {
+            TopUpInfo()
+            BottomUpInfo()
+        }
     }
 }
 
@@ -72,7 +91,11 @@ private fun TopUpInfo() {
             painter = painterResource(R.drawable.icons_instagram),
             contentDescription = stringResource(R.string.instagram_logo),
             contentScale = ContentScale.Crop,
-            modifier = Modifier.size(54.dp)
+            modifier = Modifier
+                .clip(CircleShape)
+                .size(54.dp)
+                .background(if (isSystemInDarkTheme()) Color.Transparent else Color.White)
+
         )
 
         InformationColumn(nameOfColumn = "Posts", count = "6,950")
