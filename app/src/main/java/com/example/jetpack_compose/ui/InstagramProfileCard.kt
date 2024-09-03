@@ -40,7 +40,16 @@ import com.example.jetpack_compose.ui.theme.JetpackComposeTheme
 
 @Preview
 @Composable
-fun ProfileHeaderDark() {
+fun ProfileHeader() {
+    HeaderCard {
+        TopUpInfo()
+        BottomUpInfo()
+    }
+}
+
+@Preview
+@Composable
+private fun ProfileHeaderDark() {
     JetpackComposeTheme(darkTheme = true) {
         HeaderCard {
             TopUpInfo()
@@ -51,7 +60,7 @@ fun ProfileHeaderDark() {
 
 @Preview
 @Composable
-fun ProfileHeaderLight() {
+private fun ProfileHeaderLight() {
     JetpackComposeTheme(darkTheme = false) {
         HeaderCard {
             TopUpInfo()
@@ -126,6 +135,7 @@ private fun InformationColumn(nameOfColumn: String, count: String) {
     }
 }
 
+@Preview
 @Composable
 private fun BottomUpInfo() {
     Box(modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)) {
