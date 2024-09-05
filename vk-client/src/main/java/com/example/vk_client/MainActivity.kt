@@ -8,8 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
 import com.example.vk_client.ui.contentCard.PostContentCard
-
-import com.example.vk_client.ui.theme.JetpackComposeTheme
+import com.example.vk_client.ui.theme.VkClientTheme
 
 class MainActivity : ComponentActivity() {
 
@@ -17,7 +16,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            JetpackComposeTheme {
+            VkClientTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     PostContentCard()
                 }
