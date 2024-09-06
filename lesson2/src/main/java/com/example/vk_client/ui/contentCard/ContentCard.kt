@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -115,17 +116,17 @@ private fun FooterCard() {
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        BottomItem(R.drawable.ic_views_count, "916", Modifier.weight(0.6f))
-        BottomItem(R.drawable.ic_share, "7", Modifier.weight(0.1f))
-        BottomItem(R.drawable.ic_comment, "8", Modifier.weight(0.1f))
-        BottomItem(R.drawable.ic_like, "23", Modifier.weight(0.1f))
+        BottomItem(R.drawable.ic_views_count, "916", 0.6f)
+        BottomItem(R.drawable.ic_share, "7", 0.1f)
+        BottomItem(R.drawable.ic_comment, "8", 0.1f)
+        BottomItem(R.drawable.ic_like, "23", 0.1f)
 
     }
 }
 
 @Composable
-private fun BottomItem(resourceId: Int, text: String, modifier: Modifier, contentDesc: String? = null) {
-    Row(modifier = modifier, verticalAlignment = Alignment.CenterVertically) {
+private fun RowScope.BottomItem(resourceId: Int, text: String, weight: Float, contentDesc: String? = null) {
+    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(weight)) {
         Icon(
             painter = painterResource(id = resourceId),
             contentDescription = contentDesc,
