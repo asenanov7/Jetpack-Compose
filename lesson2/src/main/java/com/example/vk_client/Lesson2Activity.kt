@@ -10,7 +10,7 @@ import androidx.compose.ui.Modifier
 import com.example.vk_client.ui.contentCard.PostContentCard
 import com.example.vk_client.ui.theme.VkClientTheme
 
-class MainActivity : ComponentActivity() {
+internal class Lesson2Activity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

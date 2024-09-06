@@ -34,7 +34,7 @@ import com.example.vk_client.R
 
 @Composable
 @PreviewLightDark
-fun PostContentCard() {
+internal fun PostContentCard() {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         colors = CardDefaults.cardColors(

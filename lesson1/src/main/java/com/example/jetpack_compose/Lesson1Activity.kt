@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import com.example.jetpack_compose.ui.ProfileHeader
 import com.example.jetpack_compose.ui.theme.JetpackComposeTheme
 
-class MainActivity : ComponentActivity() {
+internal class Lesson1Activity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

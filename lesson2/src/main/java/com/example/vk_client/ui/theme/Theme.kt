@@ -1,4 +1,4 @@
-package com.example.jetpack_compose.ui.theme
+package com.example.vk_client.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -12,33 +12,24 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Purple80,
-    secondary = PurpleGrey80,
-    tertiary = Pink80,
-    background = Color.Black,
-    surface = Color.Black,
-    onPrimary = Color.Black,
-    onSecondary = Color.White,
-    onTertiary = Color.White,
+    primary = black900,
+    secondary = black900,
+    onPrimary = Color.White,
     onBackground = Color.White,
-    onSurface = Color.White,
+    onSecondary = black500
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Purple40,
-    secondary = PurpleGrey40,
-    tertiary = Pink40,
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onTertiary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
+    primary = Color.White,
+    secondary = Color.White,
+    onPrimary = black900,
+    onBackground = black900,
+    onSecondary = black500
+
 )
 
 @Composable
-fun JetpackComposeTheme(
+internal fun VkClientTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = true,

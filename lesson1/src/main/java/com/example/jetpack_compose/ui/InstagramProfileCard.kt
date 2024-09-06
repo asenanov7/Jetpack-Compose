@@ -40,7 +40,7 @@ import com.example.jetpack_compose.ui.theme.JetpackComposeTheme
 
 @Preview
 @Composable
-fun ProfileHeader() {
+internal fun ProfileHeader() {
     HeaderCard {
         TopUpInfo()
         BottomUpInfo()
