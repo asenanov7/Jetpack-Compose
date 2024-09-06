@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -17,7 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.lesson3.scaffold.MyScaffold
+import com.example.bottom_navigation_bar.BottomNavigationBar
+import com.example.lesson3.ui.theme.JetpackComposeTheme
 
 class Lesson3Activity : ComponentActivity() {
 
@@ -25,7 +27,9 @@ class Lesson3Activity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            MyScaffold()
+            JetpackComposeTheme {
+                Scaffold(bottomBar = { BottomNavigationBar() }) {}
+            }
         }
     }
 
