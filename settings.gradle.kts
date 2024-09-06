@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Jetpack-Compose"
 include(":app")
 include(":vk-client")
+include(":lesson3")
