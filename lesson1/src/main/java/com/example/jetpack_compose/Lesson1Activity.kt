@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.jetpack_compose.ui.ProfileHeader
 import com.example.jetpack_compose.ui.theme.JetpackComposeTheme
 
 internal class Lesson1Activity : ComponentActivity() {

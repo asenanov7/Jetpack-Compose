@@ -1,4 +1,4 @@
-package com.example.jetpack_compose.ui
+package com.example.jetpack_compose
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -22,8 +22,10 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
@@ -35,37 +37,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.jetpack_compose.R
-import com.example.jetpack_compose.ui.theme.JetpackComposeTheme
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Preview
 @Composable
-internal fun ProfileHeader() {
+internal fun ProfileHeader(vm: InstagramProfileViewModel = viewModel()) {
+    val isFollowing = vm.isFollowing.collectAsState()
+
     HeaderCard {
         TopUpInfo()
-        BottomUpInfo()
-    }
-}
-
-@Preview
-@Composable
-private fun ProfileHeaderDark() {
-    JetpackComposeTheme(darkTheme = true) {
-        HeaderCard {
-            TopUpInfo()
-            BottomUpInfo()
-        }
-    }
-}
-
-@Preview
-@Composable
-private fun ProfileHeaderLight() {
-    JetpackComposeTheme(darkTheme = false) {
-        HeaderCard {
-            TopUpInfo()
-            BottomUpInfo()
-        }
+        BottomUpInfo(isFollowing.value) { vm.changeFollowingStatus() }
     }
 }
 
@@ -135,9 +116,8 @@ private fun InformationColumn(nameOfColumn: String, count: String) {
     }
 }
 
-@Preview
 @Composable
-private fun BottomUpInfo() {
+private fun BottomUpInfo(isFollowing: Boolean, onClick: () -> Unit) {
     Box(modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)) {
         Column {
             Text(
@@ -151,7 +131,8 @@ private fun BottomUpInfo() {
             Spacer(modifier = Modifier.padding(top = 8.dp))
 
             Button(
-                onClick = { TODO() },
+                modifier = Modifier.alpha(if (isFollowing) 0.5f else 1f),
+                onClick = { onClick.invoke() },
                 shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.onBackground,
