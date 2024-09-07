@@ -22,6 +22,7 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -46,7 +47,7 @@ internal fun ProfileHeader(vm: InstagramProfileViewModel = viewModel()) {
 
     HeaderCard {
         TopUpInfo()
-        BottomUpInfo(isFollowing.value) { vm.changeFollowingStatus() }
+        BottomUpInfo(isFollowing) { vm.changeFollowingStatus() }
     }
 }
 
@@ -117,7 +118,7 @@ private fun InformationColumn(nameOfColumn: String, count: String) {
 }
 
 @Composable
-private fun BottomUpInfo(isFollowing: Boolean, onClick: () -> Unit) {
+private fun BottomUpInfo(isFollowing: State<Boolean>, onClick: () -> Unit) {
     Box(modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)) {
         Column {
             Text(
@@ -131,7 +132,7 @@ private fun BottomUpInfo(isFollowing: Boolean, onClick: () -> Unit) {
             Spacer(modifier = Modifier.padding(top = 8.dp))
 
             Button(
-                modifier = Modifier.alpha(if (isFollowing) 0.5f else 1f),
+                modifier = Modifier.alpha(if (isFollowing.value) 0.5f else 1f),
                 onClick = { onClick.invoke() },
                 shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(
