@@ -1,4 +1,4 @@
-package com.example.vk_client.ui.contentCard
+package com.example.vk_client.presentation.ui.contentCard
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -29,21 +29,18 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import com.example.vk_client.R
 
 @Composable
-@PreviewLightDark
-internal fun PostContentCard() {
+internal fun PostContentCard(modifier: Modifier) {
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.onBackground
+            containerColor = MaterialTheme.colorScheme.background
         ),
         shape = RoundedCornerShape(4.dp),
-        modifier = Modifier
-            .padding(5.dp)
+        modifier = modifier.padding(5.dp)
 
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
@@ -51,7 +48,7 @@ internal fun PostContentCard() {
             Spacer(modifier = Modifier.height(8.dp))
             ContentCard()
             Spacer(modifier = Modifier.height(8.dp))
-            FooterCard()
+            Statistics()
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
@@ -80,7 +77,7 @@ private fun HeaderCard() {
                 .height(50.dp)
                 .weight(1f)
         ) {
-            Text(text = "уволено", fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.primary)
+            Text(text = "уволено", fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onBackground)
             Spacer(modifier = Modifier.height(4.dp))
             Text(text = "14:00", color = MaterialTheme.colorScheme.onSecondary)
         }
@@ -98,7 +95,7 @@ private fun HeaderCard() {
 private fun ContentCard() {
     Text(
         text = "кабаныч, когда узнал, что если сотрудникам не платить они начинают умирать от голода",
-        color = MaterialTheme.colorScheme.primary
+        color = MaterialTheme.colorScheme.onBackground
     )
     Spacer(modifier = Modifier.height(8.dp))
     Image(
@@ -111,21 +108,21 @@ private fun ContentCard() {
 
 @Preview
 @Composable
-private fun FooterCard() {
+private fun Statistics() {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
     ) {
-        BottomItem(R.drawable.ic_views_count, "916", 0.6f)
-        BottomItem(R.drawable.ic_share, "7", 0.1f)
-        BottomItem(R.drawable.ic_comment, "8", 0.1f)
-        BottomItem(R.drawable.ic_like, "23", 0.1f)
+        StatisticItem(R.drawable.ic_views_count, "916", 0.6f)
+        StatisticItem(R.drawable.ic_share, "7", 0.1f)
+        StatisticItem(R.drawable.ic_comment, "8", 0.1f)
+        StatisticItem(R.drawable.ic_like, "23", 0.1f)
 
     }
 }
 
 @Composable
-private fun RowScope.BottomItem(resourceId: Int, text: String, weight: Float, contentDesc: String? = null) {
+private fun RowScope.StatisticItem(resourceId: Int, text: String, weight: Float, contentDesc: String? = null) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(weight)) {
         Icon(
             painter = painterResource(id = resourceId),

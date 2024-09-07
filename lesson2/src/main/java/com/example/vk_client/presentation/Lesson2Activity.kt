@@ -1,14 +1,14 @@
-package com.example.vk_client
+package com.example.vk_client.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.Scaffold
+import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Modifier
-import com.example.vk_client.ui.contentCard.PostContentCard
-import com.example.vk_client.ui.theme.VkClientTheme
+import com.example.vk_client.presentation.ui.contentCard.PostContentCard
+import com.example.vk_client.presentation.ui.main.MainScreen
+import com.example.vk_client.presentation.ui.theme.VkClientTheme
 
 internal class Lesson2Activity : ComponentActivity() {
 
@@ -17,8 +17,8 @@ internal class Lesson2Activity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             VkClientTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    PostContentCard()
+                MainScreen {
+                    PostContentCard(modifier = Modifier.padding(it))
                 }
             }
         }
