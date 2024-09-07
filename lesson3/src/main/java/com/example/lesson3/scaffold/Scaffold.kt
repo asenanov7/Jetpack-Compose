@@ -9,42 +9,48 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Star
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationDrawerItem
 import androidx.compose.material3.NavigationDrawerItemDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.example.bottom_navigation_bar.BottomNavigationBar
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
 @Preview
 fun MyScaffold() {
     ModalNavigationDrawerSample {
+        val snackBarHostState = remember { SnackbarHostState() }
+        val fabVisibility = remember { mutableStateOf(true) }
+        val coroutineScope = rememberCoroutineScope()
+
         Scaffold(
             topBar = { ScaffoldTopBar() },
-            bottomBar = { ScaffoldBottomBar() },
+            bottomBar = { BottomNavigationBar() },
+            snackbarHost = { SnackbarHost(hostState = snackBarHostState) },
+            floatingActionButton = { FloatingButton(snackBarHostState, fabVisibility, coroutineScope) }
         ) {
 
             Text(
@@ -77,30 +83,6 @@ private fun ScaffoldTopBar() {
     )
 }
 
-@Preview
-@Composable
-private fun ScaffoldBottomBar() {
-    var selectedItem by remember { mutableIntStateOf(0) }
-    val items = listOf("Songs", "Artists", "Playlist")
-    val selectedIcons = listOf(Icons.Filled.Home, Icons.Filled.Favorite, Icons.Filled.Star)
-    val unselectedIcons = listOf(Icons.Outlined.Home, Icons.Outlined.Favorite, Icons.Outlined.Star)
-
-    NavigationBar {
-        items.forEachIndexed { index, item ->
-            NavigationBarItem(
-                selected = index == selectedItem,
-                label = { Text(text = item) },
-                onClick = { selectedItem = index },
-                icon = {
-                    Icon(
-                        imageVector = if (index == selectedItem) selectedIcons[index] else unselectedIcons[index],
-                        contentDescription = null
-                    )
-                })
-        }
-    }
-}
-
 @Composable
 fun ModalNavigationDrawerSample(content: @Composable () -> Unit) {
     val iconOfItems = listOf(Icons.Default.AccountCircle, Icons.Default.AccountBox)
@@ -125,4 +107,26 @@ fun ModalNavigationDrawerSample(content: @Composable () -> Unit) {
         },
         content = content
     )
+}
+
+@Composable
+fun FloatingButton(snackBarHostState: SnackbarHostState, fabVisibility: MutableState<Boolean>, coroutineScope: CoroutineScope) {
+    if (fabVisibility.value) {
+        FloatingActionButton(
+            onClick = {
+                coroutineScope.launch {
+                    val result = snackBarHostState.showSnackbar(
+                        message = "Showing snackBar",
+                        actionLabel = "OK",
+                        withDismissAction = true
+                    )
+                    if (result == SnackbarResult.ActionPerformed) {
+                        fabVisibility.value = false
+                    }
+                }
+            }
+        ) {
+            Icon(imageVector = Icons.Default.Add, contentDescription = null)
+        }
+    }
 }
