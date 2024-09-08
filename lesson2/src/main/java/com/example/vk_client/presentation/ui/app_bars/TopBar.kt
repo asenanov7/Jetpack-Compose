@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 fun ScaffoldTopBar() {
     TopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.primary),
-        title = { Text(text = "asdasd") },
+        title = { Text(text = "Вконтакте") },
         navigationIcon = {
             IconButton(onClick = { /*TODO*/ }) {
                 Icon(Icons.Filled.Menu, null)

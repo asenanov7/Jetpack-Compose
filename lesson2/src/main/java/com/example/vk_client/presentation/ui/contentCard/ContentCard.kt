@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,9 +30,19 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.vk_client.R
+import com.example.vk_client.domain.StatisticItem
+import com.example.vk_client.domain.StatisticType
 
 @Composable
-internal fun PostContentCard(modifier: Modifier) {
+internal fun PostContentCard(modifier: Modifier = Modifier) {
+
+    val mockStatisticItemList = listOf(
+        StatisticItem(type = StatisticType.VIEW, 916),
+        StatisticItem(type = StatisticType.SHARE, 7),
+        StatisticItem(type = StatisticType.COMMENT, 8),
+        StatisticItem(type = StatisticType.LIKE, 23),
+    )
+
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         colors = CardDefaults.cardColors(
@@ -48,7 +57,7 @@ internal fun PostContentCard(modifier: Modifier) {
             Spacer(modifier = Modifier.height(8.dp))
             ContentCard()
             Spacer(modifier = Modifier.height(8.dp))
-            Statistics()
+            Statistics(mockStatisticItemList)
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
@@ -108,31 +117,36 @@ private fun ContentCard() {
 
 @Preview
 @Composable
-private fun Statistics() {
+private fun Statistics(
+    statistics: List<StatisticItem>,
+) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.SpaceAround
     ) {
-        StatisticItem(R.drawable.ic_views_count, "916", 0.6f)
-        StatisticItem(R.drawable.ic_share, "7", 0.1f)
-        StatisticItem(R.drawable.ic_comment, "8", 0.1f)
-        StatisticItem(R.drawable.ic_like, "23", 0.1f)
-
+        statistics.forEach { StatisticItem(statisticItem = it) }
     }
 }
 
 @Composable
-private fun RowScope.StatisticItem(resourceId: Int, text: String, weight: Float, contentDesc: String? = null) {
-    Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.weight(weight)) {
+private fun StatisticItem(statisticItem: StatisticItem) {
+    Row(verticalAlignment = Alignment.CenterVertically) {
         Icon(
-            painter = painterResource(id = resourceId),
-            contentDescription = contentDesc,
+            painter = painterResource(id = getIconId(statisticItem.type)),
+            contentDescription = null,
             tint = MaterialTheme.colorScheme.onSecondary
         )
         Spacer(Modifier.width(4.dp))
-        Text(text = text, color = MaterialTheme.colorScheme.onSecondary)
+        Text(text = statisticItem.count.toString(), color = MaterialTheme.colorScheme.onSecondary)
     }
+
 }
 
-//тень на карточке
+private fun getIconId(statisticType: StatisticType) = when (statisticType) {
+    StatisticType.VIEW -> R.drawable.ic_views_count
+    StatisticType.SHARE -> R.drawable.ic_share
+    StatisticType.COMMENT -> R.drawable.ic_comment
+    StatisticType.LIKE -> R.drawable.ic_like
+}
 
