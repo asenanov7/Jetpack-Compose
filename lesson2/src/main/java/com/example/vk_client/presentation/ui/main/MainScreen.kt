@@ -11,7 +11,7 @@ fun MainScreen(content: @Composable (paddingValues: PaddingValues) -> Unit) {
     Scaffold(
         topBar = { ScaffoldTopBar() },
         bottomBar = { BottomNavigationBar() },
-    ) {
-        content(it)
+    ) { paddingValues ->
+        content(paddingValues)
     }
 }
