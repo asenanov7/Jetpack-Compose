@@ -1,5 +1,9 @@
-package com.example.vk_client.presentation.ui.app_bars
+package com.example.lesson4.presentation.mainscreen
 
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -9,10 +13,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
-import com.example.vk_client.ui.app_bars.BottomNavigationItem
+import androidx.compose.ui.graphics.vector.ImageVector
 
 @Composable
-fun BottomNavigationBar() {
+fun BottomBar() {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.background
     ) {
@@ -37,4 +41,14 @@ fun BottomNavigationBar() {
             )
         }
     }
+}
+
+sealed class BottomNavigationItem(
+    val icon: ImageVector,
+    val label: String,
+) {
+
+    data object Home : BottomNavigationItem(Icons.Default.Home, "Home")
+    data object Favorite : BottomNavigationItem(Icons.Default.Favorite, "Favorite")
+    data object Person : BottomNavigationItem(Icons.Default.Person, "Person")
 }
