@@ -37,4 +37,9 @@ class InstagramProfileViewModel : ViewModel() {
         }
         _instagramProfileList.value = updatedList
     }
+
+    fun removeProfile(profileInfo: ProfileInfo) {
+        val updatedList = _instagramProfileList.value.toMutableList().apply { remove(profileInfo) }
+        _instagramProfileList.value = updatedList
+    }
 }
