@@ -22,8 +22,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -38,16 +36,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Preview
 @Composable
-internal fun ProfileHeader(vm: InstagramProfileViewModel = viewModel()) {
-    val isFollowing = vm.isFollowing.collectAsState()
-
+internal fun ProfileHeader(profileInfo: ProfileInfo, onFollowClick: (profileId: Int) -> Unit) {
     HeaderCard {
         TopUpInfo()
-        BottomUpInfo(isFollowing) { vm.changeFollowingStatus() }
+        BottomUpInfo(profileInfo.title, profileInfo.isFollowing) { onFollowClick.invoke(profileInfo.id) }
     }
 }
 
@@ -118,12 +113,12 @@ private fun InformationColumn(nameOfColumn: String, count: String) {
 }
 
 @Composable
-private fun BottomUpInfo(isFollowing: State<Boolean>, onClick: () -> Unit) {
+private fun BottomUpInfo(title: String, isFollowing: Boolean, onClick: () -> Unit) {
     Box(modifier = Modifier.padding(start = 8.dp, top = 8.dp, bottom = 4.dp)) {
         Column {
             Text(
                 fontFamily = FontFamily.Cursive,
-                text = stringResource(R.string.instagram),
+                text = title,
                 fontSize = 32.sp
             )
             Text(text = stringResource(R.string.yourstomake))
@@ -132,7 +127,7 @@ private fun BottomUpInfo(isFollowing: State<Boolean>, onClick: () -> Unit) {
             Spacer(modifier = Modifier.padding(top = 8.dp))
 
             Button(
-                modifier = Modifier.alpha(if (isFollowing.value) 0.5f else 1f),
+                modifier = Modifier.alpha(if (isFollowing) 0.5f else 1f),
                 onClick = { onClick.invoke() },
                 shape = RectangleShape,
                 colors = ButtonDefaults.buttonColors(
