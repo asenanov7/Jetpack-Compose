@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.jetpack_compose"
+    namespace = "com.example.lesson4"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.jetpack_compose"
+        applicationId = "com.example.lesson4"
         minSdk = 28
         targetSdk = 34
         versionCode = 1
@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

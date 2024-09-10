@@ -1,4 +1,4 @@
-package com.example.vk_client.ui.theme
+package com.example.lesson4.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
