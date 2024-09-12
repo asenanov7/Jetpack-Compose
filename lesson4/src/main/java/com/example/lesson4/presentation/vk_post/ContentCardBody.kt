@@ -7,7 +7,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -17,16 +16,16 @@ import com.example.lesson4.R
 import com.example.lesson4.domain.PostInfoItem
 
 @Composable
-fun ContentCardBody(postInfoItem: State<PostInfoItem>) {
+fun ContentCardBody(postInfoItem: PostInfoItem) {
     Text(
-        text = postInfoItem.value.post.text,
+        text = postInfoItem.post.text,
         color = MaterialTheme.colorScheme.onBackground
     )
     Spacer(modifier = Modifier.height(8.dp))
     Image(
         modifier = Modifier.fillMaxWidth(),
         contentScale = ContentScale.FillWidth,
-        painter = painterResource(id = postInfoItem.value.post.postResId),
+        painter = painterResource(id = postInfoItem.post.postResId),
         contentDescription = stringResource(R.string.post)
     )
 }

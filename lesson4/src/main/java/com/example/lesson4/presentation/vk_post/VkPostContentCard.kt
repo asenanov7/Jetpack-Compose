@@ -9,7 +9,6 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.lesson4.domain.PostInfoItem
@@ -18,7 +17,7 @@ import com.example.lesson4.domain.StatisticItem
 @Composable
 internal fun VkPostContentCard(
     modifier: Modifier = Modifier,
-    postInfoItem: State<PostInfoItem>,
+    postInfoItem: PostInfoItem,
     onViewClick: (StatisticItem) -> Unit,
     onShareClick: (StatisticItem) -> Unit,
     onCommentClick: (StatisticItem) -> Unit,
@@ -37,7 +36,7 @@ internal fun VkPostContentCard(
             ContentCardBody(postInfoItem)
             Spacer(modifier = Modifier.height(8.dp))
             StatisticPanel(
-                statistics = postInfoItem.value.statisticItems,
+                statistics = postInfoItem.statisticItems,
                 onViewClick = { onViewClick.invoke(it) },
                 onShareClick = { onShareClick.invoke(it) },
                 onLikeClick = { onLikeClick.invoke(it) },

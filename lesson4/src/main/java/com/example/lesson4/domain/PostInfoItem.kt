@@ -1,6 +1,7 @@
 package com.example.lesson4.domain
 
 data class PostInfoItem(
+    val id: Int,
     val author: Author,
     val post: Post,
     val statisticItems: List<StatisticItem>,

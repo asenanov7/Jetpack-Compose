@@ -17,7 +17,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -32,7 +31,7 @@ import java.util.Date
 
 @SuppressLint("SimpleDateFormat")
 @Composable
-fun ContentCardHeader(postInfoItem: State<PostInfoItem>) {
+fun ContentCardHeader(postInfoItem: PostInfoItem) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -42,7 +41,7 @@ fun ContentCardHeader(postInfoItem: State<PostInfoItem>) {
             modifier = Modifier
                 .clip(CircleShape)
                 .size(50.dp),
-            painter = painterResource(postInfoItem.value.author.avatarResId),
+            painter = painterResource(postInfoItem.author.avatarResId),
             contentDescription = stringResource(R.string.avatar)
         )
 
@@ -53,10 +52,10 @@ fun ContentCardHeader(postInfoItem: State<PostInfoItem>) {
                 .height(50.dp)
                 .weight(1f)
         ) {
-            Text(text = postInfoItem.value.author.name, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onBackground)
+            Text(text = postInfoItem.author.name, fontWeight = FontWeight.Medium, color = MaterialTheme.colorScheme.onBackground)
             Spacer(modifier = Modifier.height(4.dp))
             Text(
-                text = SimpleDateFormat("HH:mm").format(Date(postInfoItem.value.time)),
+                text = SimpleDateFormat("HH:mm").format(Date(postInfoItem.time)),
                 color = MaterialTheme.colorScheme.onSecondary
             )
         }
