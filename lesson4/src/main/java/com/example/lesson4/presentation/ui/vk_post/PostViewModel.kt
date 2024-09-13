@@ -1,4 +1,4 @@
-package com.example.lesson4.data
+package com.example.lesson4.presentation.ui.vk_post
 
 import androidx.lifecycle.ViewModel
 import com.example.lesson4.R

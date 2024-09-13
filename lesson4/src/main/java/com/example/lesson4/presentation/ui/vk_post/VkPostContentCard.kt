@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.vk_post
+package com.example.lesson4.presentation.ui.vk_post
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
