@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.common
+package com.example.lesson4.common
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox

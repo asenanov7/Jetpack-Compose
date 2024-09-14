@@ -1,6 +1,5 @@
-package com.example.lesson4.presentation.common.bottom_bar
+package com.example.lesson4.common.bottom_bar
 
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
@@ -11,23 +10,25 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemColors
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.runtime.getValue
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 @Composable
-fun BottomBar() {
+fun BottomBar(navHostController: NavHostController) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.background
     ) {
-        val selectedItem = remember { mutableIntStateOf(0) }
-        val items = listOf(BottomNavigationItem.Home, BottomNavigationItem.Person, BottomNavigationItem.Favorite)
+        val backStack by navHostController.currentBackStackEntryAsState()
+        val selectedItem = backStack?.destination?.route
 
-        items.forEachIndexed { index, bottomNavigationItem ->
+        val items = listOf(BottomNavigationItem.Home, BottomNavigationItem.Profile, BottomNavigationItem.Favorite)
+
+        items.forEach { bottomNavigationItem ->
             NavigationBarItem(
                 label = { Text(text = bottomNavigationItem.label) },
-                selected = selectedItem.intValue == index,
-                onClick = { selectedItem.intValue = index },
+                selected = selectedItem.toString() == bottomNavigationItem.screen.route,
+                onClick = { navHostController.navigate(bottomNavigationItem.screen.route) },
                 icon = { Icon(bottomNavigationItem.icon, null) },
                 colors = NavigationBarItemColors(
                     selectedIconColor = MaterialTheme.colorScheme.background,
@@ -41,14 +42,4 @@ fun BottomBar() {
             )
         }
     }
-}
-
-sealed class BottomNavigationItem(
-    val icon: ImageVector,
-    val label: String,
-) {
-
-    data object Home : BottomNavigationItem(Icons.Default.Home, "Home")
-    data object Favorite : BottomNavigationItem(Icons.Default.Favorite, "Favorite")
-    data object Person : BottomNavigationItem(Icons.Default.Person, "Person")
 }
