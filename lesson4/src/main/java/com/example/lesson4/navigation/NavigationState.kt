@@ -30,5 +30,5 @@ class NavigationState(
 @SuppressLint("ComposableNaming")
 @Composable
 fun rememberNavigationState(navHostController: NavHostController = rememberNavController()): NavigationState {
-    return rememberSaveable { NavigationState(navHostController) }
+    return remember { NavigationState(navHostController) }
 }
