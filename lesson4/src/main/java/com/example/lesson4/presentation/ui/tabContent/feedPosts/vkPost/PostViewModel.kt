@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.ui.vk_post
+package com.example.lesson4.presentation.ui.tabContent.feedPosts.vkPost
 
 import androidx.lifecycle.ViewModel
 import com.example.lesson4.R

@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.ui.vk_post
+package com.example.lesson4.presentation.ui.tabContent.feedPosts.vkPost
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.Image
@@ -31,7 +31,7 @@ import java.util.Date
 
 @SuppressLint("SimpleDateFormat")
 @Composable
-fun ContentCardHeader(postInfoItem: PostInfoItem) {
+fun PostHeader(postInfoItem: PostInfoItem) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,

@@ -18,13 +18,12 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import com.example.lesson4.common.TopBar
-import com.example.lesson4.common.bottom_bar.BottomBar
+import com.example.lesson4.common.topBar.TopBar
+import com.example.lesson4.common.bottomBar.BottomBar
 import com.example.lesson4.navigation.AppNavGraph
-import com.example.lesson4.navigation.Screen
+import com.example.lesson4.navigation.Tabs
 import com.example.lesson4.navigation.rememberNavigationState
-import com.example.lesson4.presentation.ui.screens.HomeScreen
-import com.example.lesson4.presentation.ui.screens.commentsScreen.CommentsScreen
+import com.example.lesson4.presentation.ui.tabs.HomeTab
 import com.example.lesson4.presentation.ui.theme.VkClientTheme
 
 class Lesson4Activity : ComponentActivity() {
@@ -43,11 +42,10 @@ class Lesson4Activity : ComponentActivity() {
 
                     AppNavGraph(
                         navController = navigationState.navHostController,
-                        startDestination = Screen.Home.route,
-                        homeScreenContent = { HomeScreen(modifier = Modifier.padding(paddingValues), navigationState = navigationState) },
-                        favouriteScreenContent = { TestCounter("Favourite", paddingValues) },
-                        profileScreenContent = { TestCounter("Profile", paddingValues) },
-                        commentsScreenContent = { CommentsScreen(modifier = Modifier.padding(paddingValues)) }
+                        startDestination = Tabs.Home.route,
+                        homeTabContent = { HomeTab(paddingValues = paddingValues) },
+                        favouriteTabContent = { TestCounter("Favourite", paddingValues) },
+                        profileTabContent = { TestCounter("Profile", paddingValues) },
                     )
 
                 }

@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.ui.vk_post
+package com.example.lesson4.presentation.ui.tabContent.feedPosts.vkPost
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Spacer
@@ -16,7 +16,7 @@ import com.example.lesson4.R
 import com.example.lesson4.domain.PostInfoItem
 
 @Composable
-fun ContentCardBody(postInfoItem: PostInfoItem) {
+fun PostContent(postInfoItem: PostInfoItem) {
     Text(
         text = postInfoItem.post.text,
         color = MaterialTheme.colorScheme.onBackground

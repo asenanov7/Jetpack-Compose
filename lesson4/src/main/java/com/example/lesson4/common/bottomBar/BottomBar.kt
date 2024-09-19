@@ -1,4 +1,4 @@
-package com.example.lesson4.common.bottom_bar
+package com.example.lesson4.common.bottomBar
 
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -24,8 +24,8 @@ fun BottomBar(navigationState: NavigationState) {
         items.forEach { bottomNavigationItem ->
             NavigationBarItem(
                 label = { Text(text = bottomNavigationItem.label) },
-                selected = selectedItemRoute == bottomNavigationItem.screen.route,
-                onClick = { navigationState.navigateTo(bottomNavigationItem.screen.route) },
+                selected = selectedItemRoute == bottomNavigationItem.tab.route,
+                onClick = { navigationState.navigateTo(bottomNavigationItem.tab.route) },
                 icon = { Icon(bottomNavigationItem.icon, null) },
                 colors = NavigationBarItemColors(
                     selectedIconColor = MaterialTheme.colorScheme.background,

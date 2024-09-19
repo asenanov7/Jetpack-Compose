@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.ui.vk_post
+package com.example.lesson4.presentation.ui.tabContent.feedPosts.vkPost
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
@@ -24,14 +24,13 @@ import com.example.lesson4.domain.StatisticType.SHARE
 import com.example.lesson4.domain.StatisticType.VIEW
 
 @Composable
-fun StatisticPanel(
+fun PostStatisticPanel(
     statistics: List<StatisticItem>,
     onViewClick: (StatisticItem) -> Unit,
     onShareClick: (StatisticItem) -> Unit,
     onCommentClick: (StatisticItem) -> Unit,
     onLikeClick: (StatisticItem) -> Unit,
 ) {
-
     Row(
         modifier = Modifier.fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically,
@@ -72,7 +71,6 @@ fun StatisticPanel(
                 onLikeClick(likeStatisticItem)
             }
         }
-
     }
 }
 

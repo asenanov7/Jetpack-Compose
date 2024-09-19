@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.ui.vk_post
+package com.example.lesson4.presentation.ui.tabContent.feedPosts.vkPost
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -15,7 +15,7 @@ import com.example.lesson4.domain.PostInfoItem
 import com.example.lesson4.domain.StatisticItem
 
 @Composable
-internal fun VkPostContentCard(
+internal fun VkPostCard(
     modifier: Modifier = Modifier,
     postInfoItem: PostInfoItem,
     onViewClick: (StatisticItem) -> Unit,
@@ -23,7 +23,6 @@ internal fun VkPostContentCard(
     onCommentClick: (StatisticItem) -> Unit,
     onLikeClick: (StatisticItem) -> Unit,
 ) {
-
     Card(
         elevation = CardDefaults.cardElevation(defaultElevation = 10.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.background),
@@ -31,11 +30,11 @@ internal fun VkPostContentCard(
         modifier = modifier.padding(5.dp)
     ) {
         Column(modifier = Modifier.padding(4.dp)) {
-            ContentCardHeader(postInfoItem)
+            PostHeader(postInfoItem)
             Spacer(modifier = Modifier.height(8.dp))
-            ContentCardBody(postInfoItem)
+            PostContent(postInfoItem)
             Spacer(modifier = Modifier.height(8.dp))
-            StatisticPanel(
+            PostStatisticPanel(
                 statistics = postInfoItem.statisticItems,
                 onViewClick = { onViewClick.invoke(it) },
                 onShareClick = { onShareClick.invoke(it) },

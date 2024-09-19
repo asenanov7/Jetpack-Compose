@@ -12,7 +12,7 @@ class NavigationState(
 
     fun navigateTo(route: String) {
         navHostController.navigate(route) {
-            //не создает большой паровоз навигации, хранит только последний таб и тот который указ. в параметры
+            //не создает большой паровоз навигации, хранит только последний таб и тот который указ. в параметре
             popUpTo(navHostController.graph.startDestinationRoute.toString()) {
                 //сохраняет стейт даже если экран был удален из бекстек
                 saveState = true
