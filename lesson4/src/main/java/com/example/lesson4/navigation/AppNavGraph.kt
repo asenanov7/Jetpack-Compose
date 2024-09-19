@@ -12,6 +12,7 @@ fun AppNavGraph(
     homeScreenContent: @Composable () -> Unit,
     favouriteScreenContent: @Composable () -> Unit,
     profileScreenContent: @Composable () -> Unit,
+    commentsScreenContent: @Composable () -> Unit,
 
     ) {
     NavHost(
@@ -24,6 +25,8 @@ fun AppNavGraph(
         composable(Screen.Favourite.route) { favouriteScreenContent() }
 
         composable(Screen.Profile.route) { profileScreenContent() }
+
+        composable(Screen.Comments.route) { commentsScreenContent() }
 
     }
 

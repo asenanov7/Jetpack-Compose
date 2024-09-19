@@ -1,4 +1,4 @@
-package com.example.lesson4.presentation.screens
+package com.example.lesson4.presentation.ui.screens
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyColumn
@@ -11,13 +11,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.lesson4.presentation.ui.vk_post.VkPostViewModel
+import com.example.lesson4.navigation.NavigationState
+import com.example.lesson4.navigation.Screen
 import com.example.lesson4.presentation.ui.vk_post.VkPostContentCard
+import com.example.lesson4.presentation.ui.vk_post.VkPostViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @ExperimentalMaterial3Api
 @Composable
-fun HomeScreen(modifier: Modifier, viewModel: VkPostViewModel = viewModel()) {
+fun HomeScreen(modifier: Modifier, viewModel: VkPostViewModel = viewModel(), navigationState: NavigationState) {
     val vkPosts = viewModel.vkPosts.collectAsState()
 
     LazyColumn(modifier = modifier) {
@@ -41,7 +43,7 @@ fun HomeScreen(modifier: Modifier, viewModel: VkPostViewModel = viewModel()) {
                     postInfoItem = postInfo,
                     onViewClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
                     onShareClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
-                    onCommentClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
+                    onCommentClick = { clickedStatistic -> navigationState.navigateTo(Screen.COMMENTS_ROUTE) },
                     onLikeClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
                 )
             }

@@ -23,7 +23,8 @@ import com.example.lesson4.common.bottom_bar.BottomBar
 import com.example.lesson4.navigation.AppNavGraph
 import com.example.lesson4.navigation.Screen
 import com.example.lesson4.navigation.rememberNavigationState
-import com.example.lesson4.presentation.screens.HomeScreen
+import com.example.lesson4.presentation.ui.screens.HomeScreen
+import com.example.lesson4.presentation.ui.screens.commentsScreen.CommentsScreen
 import com.example.lesson4.presentation.ui.theme.VkClientTheme
 
 class Lesson4Activity : ComponentActivity() {
@@ -36,16 +37,17 @@ class Lesson4Activity : ComponentActivity() {
                 val navigationState = rememberNavigationState()
 
                 Scaffold(
-                    topBar = { TopBar() },
+                    topBar = { TopBar(navigationState) },
                     bottomBar = { BottomBar(navigationState) },
                 ) { paddingValues ->
 
                     AppNavGraph(
                         navController = navigationState.navHostController,
                         startDestination = Screen.Home.route,
-                        homeScreenContent = { HomeScreen(modifier = Modifier.padding(paddingValues)) },
+                        homeScreenContent = { HomeScreen(modifier = Modifier.padding(paddingValues), navigationState = navigationState) },
                         favouriteScreenContent = { TestCounter("Favourite", paddingValues) },
-                        profileScreenContent = { TestCounter("Profile", paddingValues) }
+                        profileScreenContent = { TestCounter("Profile", paddingValues) },
+                        commentsScreenContent = { CommentsScreen(modifier = Modifier.padding(paddingValues)) }
                     )
 
                 }
