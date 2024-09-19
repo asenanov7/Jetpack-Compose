@@ -20,7 +20,7 @@ fun HomeTab(paddingValues: PaddingValues, viewModel: VkPostViewModel = viewModel
             FeedPostsScreen(vkPosts = currentState.posts, paddingValues = paddingValues)
         }
         is HomeState.PostComments -> {
-            CommentsScreen(paddingValues = paddingValues)
+            CommentsScreen(comments = currentState.comments, paddingValues = paddingValues)
         }
         is HomeState.Initial -> {
             Unit

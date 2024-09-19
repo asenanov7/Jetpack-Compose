@@ -45,7 +45,7 @@ fun FeedPostsScreen(
                     postInfoItem = postInfo,
                     onViewClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
                     onShareClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
-                    onCommentClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
+                    onCommentClick = { viewModel.showComments(postInfo) },
                     onLikeClick = { clickedStatistic -> viewModel.updateCount(postInfo, clickedStatistic) },
                 )
             }
