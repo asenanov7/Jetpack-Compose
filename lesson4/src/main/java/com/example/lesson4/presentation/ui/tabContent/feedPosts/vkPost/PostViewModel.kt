@@ -3,6 +3,7 @@ package com.example.lesson4.presentation.ui.tabContent.feedPosts.vkPost
 import androidx.lifecycle.ViewModel
 import com.example.lesson4.R
 import com.example.lesson4.domain.Author
+import com.example.lesson4.domain.HomeState
 import com.example.lesson4.domain.Post
 import com.example.lesson4.domain.PostInfoItem
 import com.example.lesson4.domain.StatisticItem
@@ -35,11 +36,12 @@ class VkPostViewModel : ViewModel() {
         }
     }
 
-    private val _vkPosts = MutableStateFlow(listOfPosts)
+    private val _screenState = MutableStateFlow(HomeState.FeedPost(listOfPosts))
 
-    val vkPosts: StateFlow<List<PostInfoItem>> = _vkPosts.asStateFlow()
+    val screenState: StateFlow<HomeState> = _screenState.asStateFlow()
 
     fun updateCount(postInfoItem: PostInfoItem, clickedItem: StatisticItem) {
+        if (screenState.value !is HomeState.FeedPost) return
         val newStatistics = postInfoItem.statisticItems.toMutableList().apply {
             replaceAll { item ->
                 if (item == clickedItem) item.copy(count = item.count.plus(1))
@@ -47,8 +49,10 @@ class VkPostViewModel : ViewModel() {
             }
         }
         val updatedItem =
-            _vkPosts.value.find { it == postInfoItem }?.copy(statisticItems = newStatistics) ?: throw IllegalArgumentException("post is not find")
-        _vkPosts.value = _vkPosts.value.toMutableList().apply {
+            _screenState.value.posts.find { it == postInfoItem }?.copy(statisticItems = newStatistics)
+                ?: throw IllegalArgumentException("post is not find")
+
+        val newCollection = _screenState.value.posts.toMutableList().apply {
             replaceAll {
                 if (it.id == updatedItem.id) {
                     it.copy(statisticItems = newStatistics)
@@ -57,10 +61,13 @@ class VkPostViewModel : ViewModel() {
                 }
             }
         }
+        _screenState.value = HomeState.FeedPost(newCollection)
     }
 
     fun removePost(postInfoItem: PostInfoItem) {
-        _vkPosts.value = _vkPosts.value.toMutableList().apply { remove(postInfoItem) }
+        if (screenState.value !is HomeState.FeedPost) return
+        val newCollection = _screenState.value.posts.toMutableList().apply { remove(postInfoItem) }
+        _screenState.value = HomeState.FeedPost(newCollection)
     }
 
 }
